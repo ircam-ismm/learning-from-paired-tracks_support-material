@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Audio Demo: MoisesDB</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .category-title {
+      font-size: 1.5em;
+      margin: 20px 0 10px;
+      color: #333;
+      text-align: center;
+    }
+    .memory-guide-row, .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .audio-container {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      width: 30%;
+      min-width: 200px;
+    }
+    .comment-box {
+      display: block;
+      width: 90%;
+      margin: 20px auto;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    hr.separator {
+      border: none;
+      border-top: 2px dashed #ccc;
+      margin: 40px auto;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Audio Demo for MoisesDB</h2>
+  <div id="audioContent"></div>
+
+  <script>
+  const root = 'moises';
+
+  const exampleSets = [
+    {
+      name: "example 1",
+      basePath: "0611",
+      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+      examples: [
+        'moises/0611/0.35s_A16.mp3',
+        'moises/0611/0.25s_A64.mp3',
+        'moises/0611/0.5s_A256.mp3',
+      ],
+      comment: "Malgré une mémoire avec des notes différentes de durée variable, toutes les réponses sont monotones — peu importe la taille de l'alphabet. \
+      Interessant, A16 et A64 choisissent la même note a joeur en réponse, juste A16 rajoute une petite variation. A256 répète 2 notes sur l'ensemble de la réponse, notes différentes de celle choisies par les autres alphabets \
+      mais ces 2 notes font partie du même segment. Dans cet exemple on observe donc que la taille d'alphabet n'a pas d'impact conséquent sur la réponse générée."
+    },
+    {
+      name: "example 2",
+      basePath: "524a",
+      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+      examples: [
+        'moises/524a/0.5s_A16.mp3',
+        'moises/524a/0.5s_A64.mp3',
+        'moises/524a/0.5s_A256.mp3',
+      ],
+      comment: "De manière générale, les 3 alphabets ont tendance a prendre la parole au début puis se taire. Plus particulièrement, on idrati que ces configs — dans cet exemple — prennent principalement la parole lors de silences.\
+      A16 présente des longues séquences continues (bonne exactitude) et plus l'alphabet grandit moins les séquences sont continues. Après vérification dans info.txt les segments silencieux ont bien été choisis par le modèle et ce ne sotn pas de -1 (pas de match)"
+    },
+    {
+      name: "example 3",
+      basePath: "0e0d",
+      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+      examples: [
+        'moises/0e0d/0.25s_A16.mp3',
+        'moises/0e0d/0.5s_A64.mp3',
+        'moises/0e0d/0.35s_A256.mp3'
+      ],
+      comment: "comment for example 3..."
+    }
+  ];
+
+
+  const content = document.getElementById('audioContent');
+
+exampleSets.forEach(set => {
+  const section = document.createElement('div');
+  section.className = 'category-section';
+
+  const title = document.createElement('div');
+  title.className = 'category-title';
+  title.textContent = `${set.name}`;
+  section.appendChild(title);
+
+  // 🔹 Top files (original, memory, guide)
+  const topRow = document.createElement('div');
+  topRow.className = 'memory-guide-row';
+
+  set.topFiles.forEach(file => {
+    const container = document.createElement('div');
+    container.className = 'audio-container';
+
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = `moises/${set.basePath}/${file}`;
+    audio.preload = "none";
+
+    const label = document.createElement('p');
+    label.textContent = file.replace('.mp3', '');
+
+    container.appendChild(label);
+    container.appendChild(audio);
+    topRow.appendChild(container);
+  });
+
+  section.appendChild(topRow);
+
+  // 🔹 Grid of 3 examples
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+
+  set.examples.forEach(filePath => {
+    const container = document.createElement('div');
+    container.className = 'audio-container';
+
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = filePath;
+    audio.preload = "none";
+
+    const label = document.createElement('p');
+    const fileName = filePath.split('/').pop().replace('.mp3', '').replace("_"," ");
+    label.textContent = fileName;
+
+    container.appendChild(label);
+    container.appendChild(audio);
+    grid.appendChild(container);
+  });
+
+  section.appendChild(grid);
+
+  // 🔹 Comment box
+  if (set.comment) {
+    const commentBox = document.createElement('div');
+    commentBox.style.marginTop = '15px';
+    commentBox.style.padding = '10px';
+    commentBox.style.backgroundColor = '#fefefe';
+    commentBox.style.borderLeft = '4px solid #007BFF';
+    commentBox.style.fontStyle = 'italic';
+    commentBox.textContent = set.comment;
+    section.appendChild(commentBox);
+  }
+
+  // 🔹 Separator
+  section.appendChild(document.createElement('hr')).className = 'separator';
+
+  content.appendChild(section);
+});
+
+</script>
+
+</body>
+</html>
