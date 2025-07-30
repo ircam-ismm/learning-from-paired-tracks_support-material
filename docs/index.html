@@ -127,6 +127,18 @@
     different parameters.
   </p>
   <p>
+    The segmentation size appears to have little impact for the TPP. Instead, increased vocabulary size generally 
+    correlates with reduced performance likely due to the difficulty of modeling fine-grained relationships. 
+    Large variance observed across configurations (as shown by the wide boxplots on TPP values) indicates a 
+    pronounced variability in the model’s performances.
+  </p>
+  <p>
+    While LCP results outperform random baseline, the prefix lengths remain low, indicating difficulty in anticipating 
+    future tokens. In contrast, MoisesDB—composed of Western pop music, i.e., pulsed music—appears to require a 
+    segmentation window that aligns with the beat (pulse) of the track. While LCP shows no consistent trend across 
+    segment duration or alphabet size for MoisesDB, we find that A256/0.25s approaches the maximum LCP value.
+  </p>
+  <p>
     Below are the figures for the performances of the system for MoisesDB dataset under the constrained generation setup.
   </p>
 </div>
