@@ -126,9 +126,7 @@
     Therefore, what has been learned must be high-level, common relationships among all paired tracks, i.e.
     corpus-level relationships. Moreover, such learning appears in both stylistically very different datasets,
     MoisesDB and MICA, related to different music genre (pop/rock and free improvisation). This observation allows
-    us to, at least partially, validate the interest of our framework. In the following sections we discuss in more
-    details how the quantitative metrics True Positive Percentage and Longest Common Prefix are influenced by
-    different parameters.
+    us to, at least partially, validate the interest of our framework.
   </p>
   <p>
     The segmentation size appears to have little impact for the TPP. Instead, increased vocabulary size generally 
@@ -138,7 +136,7 @@
   </p>
   <p>
     While LCP results outperform random baseline, the prefix lengths remain low, indicating difficulty in anticipating 
-    future tokens. In contrast, MoisesDB—composed of Western pop music, i.e., pulsed music—appears to require a 
+    future tokens. MoisesDB — composed of Western pop music, i.e., pulsed music — appears to require a 
     segmentation window that aligns with the beat (pulse) of the track. While LCP shows no consistent trend across 
     segment duration or alphabet size for MoisesDB, we find that A256/0.25s approaches the maximum LCP value.
   </p>
@@ -178,9 +176,12 @@
         'moises/0611/0.25s_A64.mp3',
         'moises/0611/0.5s_A256.mp3',
       ],
-      comment: "Malgré une mémoire avec des notes différentes de durée variable, toutes les réponses sont monotones — peu importe la taille de l'alphabet. \
-      Interessant, A16 et A64 choisissent la même note a joeur en réponse, juste A16 rajoute une petite variation. A256 répète 2 notes sur l'ensemble de la réponse, notes différentes de celle choisies par les autres alphabets \
-      mais ces 2 notes font partie du même segment. Dans cet exemple on observe donc que la taille d'alphabet n'a pas d'impact conséquent sur la réponse générée."
+      comment: "Despite a memory with different notes of varying duration, all responses are monotone - \
+      no matter how large the alphabet. Interestingly, both A16 and A64 choose the same note in response,\
+       just A16 adds a little variation. A256 repeats 2 notes over the whole response, different from \
+       those chosen by the other alphabets, but these 2 notes are part of the same segment. \
+       In this example, we can see that alphabet size has no significant impact on the response generated."
+
     },
     {
       name: "example 2",
@@ -191,9 +192,12 @@
         'moises/524a/0.5s_A64.mp3',
         'moises/524a/0.5s_A256.mp3',
       ],
-      comment: "De manière générale, les 3 alphabets ont tendance a prendre la parole au début puis se taire. Plus particulièrement, on idrati que ces configs — dans cet exemple — prennent principalement la parole lors de silences.\
-      A16 présente des longues séquences continues (bonne exactitude) et plus l'alphabet grandit moins les séquences sont continues, ce qui confirme la difficulté croissante de modéliser des séquence symboliques avec des alphabets plus grands.\
-       Après vérification dans info.txt les segments silencieux ont bien été choisis par le modèle et ce ne sotn pas de -1 (pas de match)"
+      comment: "Generally speaking, all 3 alphabets tend to speak up at first, then fall silent. More specifically,\
+       it looks as if these configs - in this example - mainly speak up during silences.\
+      A16 presents long continuous sequences (good accuracy) and the larger the alphabet \
+      the less continuous the sequences, confirming the increasing difficulty of modeling symbolic sequences with larger alphabets.\
+      After checking in info.txt the silent segments have been well chosen by the model and this is not -1 (no match found)."
+
     },
     {
       name: "example 3",
