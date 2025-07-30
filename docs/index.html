@@ -50,10 +50,53 @@
       margin: 40px auto;
       width: 80%;
     }
+    .summary-section {
+      background: #ffffff;
+      padding: 15px 20px;
+      margin: 20px auto;
+      border-left: 4px solid #007BFF;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+    .summary-section h3 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .summary-section p {
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
   </style>
 </head>
 <body>
   <h2 style="text-align: center;">Audio Demo for MoisesDB</h2>
+  <!-- 🔹 Summary Section -->
+<div class="summary-section">
+  <h3>Summary of Results</h3>
+  <p>
+    This work explored the possibility to include learned relationships in the decision process of Musical Agents.
+    The training of the different model configurations converged for both datasets, and the symbolic performances
+    on the re-generation task prove that some relationships have been learned. The evaluation on each dataset leads
+    to True Positive Percentage (TPP) between 10% and 20% of the learned relationships. Such percentage values,
+    which might appear as low, was expected, since the TPP values do not take into account any specificity of the
+    different tracks, but rather to general "musical relationships" that are emerging globally in each database.
+    Thus, the important finding is that we can confirm such general relationship are learned, as shown by the fact
+    that the values are significantly larger than a random generation (<em>p</em>-value &lt; 0.0001).
+  </p>
+  <p>
+    Therefore, what has been learned must be high-level, common relationships among all paired tracks, i.e.
+    corpus-level relationships. Moreover, such learning appears in both stylistically very different datasets,
+    MoisesDB and MICA, related to different music genre (pop/rock and free improvisation). This observation allows
+    us to, at least partially, validate the interest of our framework. In the following sections we discuss in more
+    details how the quantitative metrics True Positive Percentage and Longest Common Prefix are influenced by
+    different parameters.
+  </p>
+</div>
+
   <div id="audioContent"></div>
 
   <script>
