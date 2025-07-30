@@ -69,6 +69,37 @@
       margin-bottom: 10px;
       text-align: justify;
     }
+    .figures-section {
+      background: #fff;
+      padding: 15px 20px;
+      margin: 20px auto;
+      border-left: 4px solid #28a745;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      max-width: 900px;
+    }
+    .figures-section h3 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .figure {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .caption {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
 
   </style>
 </head>
@@ -95,7 +126,26 @@
     details how the quantitative metrics True Positive Percentage and Longest Common Prefix are influenced by
     different parameters.
   </p>
+  <p>
+    Below are the figures for the performances of the system for MoisesDB dataset under the constrained generation setup.
+  </p>
 </div>
+
+<!-- 🔹 Figures Section -->
+<div class="figures-section">
+  <h3>Main Figures</h3>
+
+  <div class="figure">
+    <img src="figures/moises_tpp_fe.png" alt="Figure 1" />
+    <p class="caption">Figure 1 – True Positive Percentage on MoisesDB dataset under the constrained generation setup.</p>
+  </div>
+
+  <div class="figure">
+    <img src="figures/moises_lcp_fe_2.png" alt="Figure 2" />
+    <p class="caption">Figure 2 – Longest Common Prefix on MoisesDB dataset under the constrained generation setup.</p>
+  </div>
+</div>
+
 
   <div id="audioContent"></div>
 
