@@ -256,7 +256,7 @@ exampleSets.forEach(set => {
     audio.src = `${root}/${set.basePath}/${cfg}.mp3`;
 
     const label = document.createElement('p');
-    label.textContent = cfg;
+    label.textContent = cfg.replace("_"," ");
 
     const metrics = document.createElement('div');
     metrics.className = 'metrics';
