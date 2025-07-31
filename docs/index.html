@@ -256,7 +256,9 @@
         }
         
       ],
-      comment: "comment for example 3..."
+      comment: "Since the memory is composed of fine-grained notes, the smallest window is well suited for this case. The largest window (0.5 seconds) \
+      is quite large and thus one segment generally contains more than one note and contrary tio what is expected from the LCP figure this configuration struggles to predict\
+       future tokens (max_len is small). Overall the accuracy is low, probably due to the complexity of the memory, i.e. memory uses a large proportion of the vocabulary so there are few repeated tokens."
     }
   ];
 
