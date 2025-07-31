@@ -282,7 +282,7 @@ exampleSets.forEach(set => {
     audio.controls = true;
     audio.src = `moises/${set.basePath}/${file}`;
     const label = document.createElement('p');
-    label.textContent = file.replace('.mp3', '');
+    label.textContent = file.replace('.mp3', '').replace('_',' ');
     container.appendChild(label);
     container.appendChild(audio);
     topRow.appendChild(container);
