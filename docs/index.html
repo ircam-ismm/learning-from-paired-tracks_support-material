@@ -306,9 +306,9 @@ exampleSets.forEach(set => {
     const metrics = document.createElement('div');
     metrics.className = 'metrics';
     metrics.innerHTML = `
-      <small>Accuracy: ${(example.accuracy * 100).toFixed(1)}%</small><br>
+      <small>Accuracy: ${(example.accuracy).toFixed(1)}%</small><br>
       <small>Max Len: ${example.max_len}</small><br>
-      <small>Entropy: ${example.entropy.toFixed(2)}</small>
+      <small>Entropy: ${example.entropy.toFixed(2)}[Bits]</small> 
     `;
     
     container.appendChild(label);
