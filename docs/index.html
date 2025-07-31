@@ -99,8 +99,6 @@
       margin-top: 5px;
       font-style: italic;
     }
-
-
   </style>
 </head>
 <body>
@@ -146,124 +144,78 @@
 </div>
 
 <!-- 🔹 Figures Section -->
-<div class="figures-section">
+<!-- <div class="figures-section">
   <h3>Main Figures</h3>
-
   <div class="figure">
     <img src="figures/moises_tpp_fe.png" alt="Figure 1" />
     <p class="caption">Figure 1 – True Positive Percentage on MoisesDB dataset under the constrained generation setup.</p>
   </div>
-
   <div class="figure">
     <img src="figures/moises_lcp_fe_2.png" alt="Figure 2" />
     <p class="caption">Figure 2 – Longest Common Prefix on MoisesDB dataset under the constrained generation setup.</p>
   </div>
-</div>
+</div> -->
 
+<div id="audioContent"></div>
 
-  <div id="audioContent"></div>
+<script>
+const root = 'moises';
 
-  <script>
-  const root = 'moises';
+const allConfigs = [
+  "0.25s_A16", "0.25s_A64", "0.25s_A256",
+  "0.35s_A16", "0.35s_A64", "0.35s_A256",
+  "0.5s_A16", "0.5s_A64", "0.5s_A256"
+];
 
-  const exampleSets = [
-    {
-      name: "0611",
-      basePath: "0611",
-      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-      examples: [
-        {
-          path:'moises/0611/0.35s_A16.mp3',
-          accuracy : 27,
-          max_len: 8,
-          entropy:0.98,
-        },
-        {
-          path:'moises/0611/0.25s_A64.mp3',
-          accuracy:18,
-          max_len:2,
-          entropy:0.93
-        },
-        {
-          path:'moises/0611/0.5s_A256.mp3',
-          accuracy:12.5,
-          max_len:1,
-          entropy:0.21
-        }
-        
-      ],
-      comment: "Despite a memory with different notes of varying duration, all responses are monotone - \
+const exampleSets = [
+  {
+    name: "0611",
+    basePath: "0611",
+    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    examples: [
+      { path:'moises/0611/0.35s_A16.mp3', accuracy: 27, max_len: 8, entropy:0.98 },
+      { path:'moises/0611/0.25s_A64.mp3', accuracy:18, max_len:2, entropy:0.93 },
+      { path:'moises/0611/0.5s_A256.mp3', accuracy:12.5, max_len:1, entropy:0.21 }
+    ],
+    comment: "Despite a memory with different notes of varying duration, all responses are monotone - \
       no matter how large the alphabet. Interestingly, both A16 and A64 choose the same note in response,\
        just A16 adds a little variation. A256 repeats 2 notes over the whole response, different from \
        those chosen by the other alphabets, but these 2 notes are part of the same segment. \
        In this example, we can see that alphabet size has no significant impact on the response generated."
-
-    },
-    {
-      name: "524a",
-      basePath: "524a",
-      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-      examples: [
-        {
-          path:'moises/524a/0.5s_A16.mp3',
-          accuracy : 39,
-          max_len: 10,
-          entropy:0.7,
-        },
-        {
-          path:'moises/524a/0.5s_A64.mp3',
-          accuracy:10,
-          max_len:8,
-          entropy:2.8
-        },
-        {
-          path:'moises/524a/0.5s_A256.mp3',
-          accuracy:13.5,
-          max_len:3,
-          entropy:2.16
-        }
-        
-      ],
-      comment: "Generally speaking, all 3 alphabets tend to speak up at first, then fall silent. More specifically,\
+  },
+  {
+    name: "524a",
+    basePath: "524a",
+    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    examples: [
+      { path:'moises/524a/0.5s_A16.mp3', accuracy: 39, max_len: 10, entropy:0.7 },
+      { path:'moises/524a/0.5s_A64.mp3', accuracy:10, max_len:8, entropy:2.8 },
+      { path:'moises/524a/0.5s_A256.mp3', accuracy:13.5, max_len:3, entropy:2.16 }
+    ],
+    comment: "Generally speaking, all 3 alphabets tend to speak up at first, then fall silent. More specifically,\
        it looks as if these configs - in this example - mainly speak up during silences.\
       A16 presents long continuous sequences (good accuracy) and the larger the alphabet \
       the less continuous the sequences, confirming the increasing difficulty of modeling symbolic sequences with larger alphabets.\
       Counterintuitively, the accuracy of A256 is greater than A64, but still the maximum LCP is still greater for A64."
+  },
+  {
+    name: "0e0d",
+    basePath: "0e0d",
+    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    examples: [
+      { path:'moises/0e0d/0.25s_A16.mp3', accuracy: 15, max_len: 5, entropy:2.3 },
+      { path:'moises/0e0d/0.35s_A256.mp3', accuracy:9, max_len:2, entropy:3.5 },
+      { path:'moises/0e0d/0.5s_A64.mp3', accuracy:10.5, max_len:3, entropy:2.7 }
+    ],
+    comment: "Since the memory is composed of fine-grained notes, the smallest window is well suited for this case. The largest window (0.5 seconds) \
+      is quite large and thus one segment generally contains more than one note and contrary to what is expected from the LCP figure (see paper) this \
+      configuration struggles to predict\
+       future tokens (max_len is small). Overall the accuracy is low, probably due to the complexity of the memory, i.e. memory uses a large \
+       proportion of the vocabulary so there are few repeated tokens."
+  }
+];
 
-    },
-    {
-      name: "0e0d",
-      basePath: "0e0d",
-      topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-      examples: [
-        {
-          path:'moises/0e0d/0.25s_A16.mp3',
-          accuracy : 15,
-          max_len: 5,
-          entropy:2.3,
-        },
-        {
-          path:'moises/0e0d/0.35s_A256.mp3',
-          accuracy:9,
-          max_len:2,
-          entropy:3.5
-        },
-        {
-          path:'moises/0e0d/0.5s_A64.mp3',
-          accuracy:10.5,
-          max_len:3,
-          entropy:2.7
-        }
-        
-      ],
-      comment: "Since the memory is composed of fine-grained notes, the smallest window is well suited for this case. The largest window (0.5 seconds) \
-      is quite large and thus one segment generally contains more than one note and contrary tio what is expected from the LCP figure this configuration struggles to predict\
-       future tokens (max_len is small). Overall the accuracy is low, probably due to the complexity of the memory, i.e. memory uses a large proportion of the vocabulary so there are few repeated tokens."
-    }
-  ];
-
-
-  const content = document.getElementById('audioContent');
+const content = document.getElementById('audioContent');
 
 exampleSets.forEach(set => {
   const section = document.createElement('div');
@@ -274,7 +226,7 @@ exampleSets.forEach(set => {
   title.textContent = `Example: ${set.name}`;
   section.appendChild(title);
 
-  // 🔹 Top files (original, memory, guide)
+  // Top files
   const topRow = document.createElement('div');
   topRow.className = 'memory-guide-row';
   set.topFiles.forEach(file => {
@@ -282,7 +234,7 @@ exampleSets.forEach(set => {
     container.className = 'audio-container';
     const audio = document.createElement('audio');
     audio.controls = true;
-    audio.src = `moises/${set.basePath}/${file}`;
+    audio.src = `${root}/${set.basePath}/${file}`;
     const label = document.createElement('p');
     label.textContent = file.replace('.mp3', '').replace('_',' ');
     container.appendChild(label);
@@ -291,28 +243,36 @@ exampleSets.forEach(set => {
   });
   section.appendChild(topRow);
 
-  // 🔹 Examples with metrics
+  // All configs
   const grid = document.createElement('div');
   grid.className = 'grid';
-  set.examples.forEach(example => {
+  allConfigs.forEach(cfg => {
     const container = document.createElement('div');
     container.className = 'audio-container';
-    
+
+    const highlightExample = set.examples.find(e => e.path.includes(cfg));
     const audio = document.createElement('audio');
     audio.controls = true;
-    audio.src = example.path;
+    audio.src = `${root}/${set.basePath}/${cfg}.mp3`;
+
     const label = document.createElement('p');
-    const fileName = example.path.split('/').pop().replace('.mp3', '');
-    label.textContent = fileName;
-    
+    label.textContent = cfg;
+
     const metrics = document.createElement('div');
     metrics.className = 'metrics';
-    metrics.innerHTML = `
-      <small>Accuracy: ${(example.accuracy).toFixed(1)}%</small><br>
-      <small>Max Len: ${example.max_len}</small><br>
-      <small>Entropy: ${example.entropy.toFixed(2)}[Bits]</small> 
-    `;
-    
+
+    if (highlightExample) {
+      metrics.innerHTML = `
+        <small><b>Accuracy:</b> ${(highlightExample.accuracy).toFixed(1)}%</small><br>
+        <small><b>Max Len:</b> ${highlightExample.max_len}</small><br>
+        <small><b>Entropy:</b> ${highlightExample.entropy.toFixed(2)} [Bits]</small>
+      `;
+      container.style.fontWeight = 'bold';
+      container.style.color = '#000';
+    } else {
+      container.style.opacity = '0.7';
+    }
+
     container.appendChild(label);
     container.appendChild(audio);
     container.appendChild(metrics);
@@ -320,7 +280,6 @@ exampleSets.forEach(set => {
   });
   section.appendChild(grid);
 
-  // 🔹 Comment
   if (set.comment) {
     const commentBox = document.createElement('div');
     commentBox.className = 'comment-box';
@@ -329,11 +288,8 @@ exampleSets.forEach(set => {
   }
 
   section.appendChild(document.createElement('hr'));
-  document.getElementById('audioContent').appendChild(section);
+  content.appendChild(section);
 });
-
-
 </script>
-
 </body>
 </html>
