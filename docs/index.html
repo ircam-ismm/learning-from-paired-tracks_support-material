@@ -269,73 +269,67 @@ exampleSets.forEach(set => {
 
   const title = document.createElement('div');
   title.className = 'category-title';
-  title.textContent = `${set.name}`;
+  title.textContent = `Example: ${set.name}`;
   section.appendChild(title);
 
   // 🔹 Top files (original, memory, guide)
   const topRow = document.createElement('div');
   topRow.className = 'memory-guide-row';
-
   set.topFiles.forEach(file => {
     const container = document.createElement('div');
     container.className = 'audio-container';
-
     const audio = document.createElement('audio');
     audio.controls = true;
     audio.src = `moises/${set.basePath}/${file}`;
-    audio.preload = "none";
-
     const label = document.createElement('p');
     label.textContent = file.replace('.mp3', '');
-
     container.appendChild(label);
     container.appendChild(audio);
     topRow.appendChild(container);
   });
-
   section.appendChild(topRow);
 
-  // 🔹 Grid of 3 examples
+  // 🔹 Examples with metrics
   const grid = document.createElement('div');
   grid.className = 'grid';
-
-  set.examples.forEach(filePath => {
+  set.examples.forEach(example => {
     const container = document.createElement('div');
     container.className = 'audio-container';
-
+    
     const audio = document.createElement('audio');
     audio.controls = true;
-    audio.src = filePath;
-    audio.preload = "none";
-
+    audio.src = example.path;
     const label = document.createElement('p');
-    const fileName = filePath.split('/').pop().replace('.mp3', '').replace("_"," ");
+    const fileName = example.path.split('/').pop().replace('.mp3', '');
     label.textContent = fileName;
-
+    
+    const metrics = document.createElement('div');
+    metrics.className = 'metrics';
+    metrics.innerHTML = `
+      <small>Accuracy: ${(example.accuracy * 100).toFixed(1)}%</small><br>
+      <small>Max Len: ${example.max_len}</small><br>
+      <small>Entropy: ${example.entropy.toFixed(2)}</small>
+    `;
+    
     container.appendChild(label);
     container.appendChild(audio);
+    container.appendChild(metrics);
     grid.appendChild(container);
   });
-
   section.appendChild(grid);
 
-  // 🔹 Comment box
+  // 🔹 Comment
   if (set.comment) {
     const commentBox = document.createElement('div');
-    commentBox.style.marginTop = '15px';
-    commentBox.style.padding = '10px';
-    commentBox.style.backgroundColor = '#fefefe';
-    commentBox.style.borderLeft = '4px solid #007BFF';
-    commentBox.style.fontStyle = 'italic';
+    commentBox.className = 'comment-box';
     commentBox.textContent = set.comment;
     section.appendChild(commentBox);
   }
 
-  // 🔹 Separator
-  section.appendChild(document.createElement('hr')).className = 'separator';
-
-  content.appendChild(section);
+  section.appendChild(document.createElement('hr'));
+  document.getElementById('audioContent').appendChild(section);
 });
+
 
 </script>
 
