@@ -172,9 +172,25 @@
       basePath: "0611",
       topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
       examples: [
-        'moises/0611/0.35s_A16.mp3',
-        'moises/0611/0.25s_A64.mp3',
-        'moises/0611/0.5s_A256.mp3',
+        {
+          path:'moises/0611/0.35s_A16.mp3',
+          accuracy : 27,
+          max_len: 8,
+          entropy:0.98,
+        },
+        {
+          path:'moises/0611/0.25s_A64.mp3',
+          accuracy:18,
+          max_len:2,
+          entropy:0.93
+        },
+        {
+          path:'moises/0611/0.5s_A256.mp3',
+          accuracy:12.5,
+          max_len:1,
+          entropy:0.21
+        }
+        
       ],
       comment: "Despite a memory with different notes of varying duration, all responses are monotone - \
       no matter how large the alphabet. Interestingly, both A16 and A64 choose the same note in response,\
@@ -188,15 +204,31 @@
       basePath: "524a",
       topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
       examples: [
-        'moises/524a/0.5s_A16.mp3',
-        'moises/524a/0.5s_A64.mp3',
-        'moises/524a/0.5s_A256.mp3',
+        {
+          path:'moises/524a/0.5s_A16.mp3',
+          accuracy : 39,
+          max_len: 10,
+          entropy:0.7,
+        },
+        {
+          path:'moises/524a/0.5s_A64.mp3',
+          accuracy:10,
+          max_len:8,
+          entropy:2.8
+        },
+        {
+          path:'moises/524a/0.5s_A256.mp3',
+          accuracy:13.5,
+          max_len:3,
+          entropy:2.16
+        }
+        
       ],
       comment: "Generally speaking, all 3 alphabets tend to speak up at first, then fall silent. More specifically,\
        it looks as if these configs - in this example - mainly speak up during silences.\
       A16 presents long continuous sequences (good accuracy) and the larger the alphabet \
       the less continuous the sequences, confirming the increasing difficulty of modeling symbolic sequences with larger alphabets.\
-      After checking in info.txt the silent segments have been well chosen by the model and this is not -1 (no match found)."
+      Counterintuitively, the accuracy of A256 is greater than A64, but still the maximum LCP is still greater for A64."
 
     },
     {
@@ -204,9 +236,24 @@
       basePath: "0e0d",
       topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
       examples: [
-        'moises/0e0d/0.25s_A16.mp3',
-        'moises/0e0d/0.35s_A256.mp3',
-        'moises/0e0d/0.5s_A64.mp3'
+        {
+          path:'moises/0e0d/0.25s_A16.mp3',
+          accuracy : 15,
+          max_len: 5,
+          entropy:2.3,
+        },
+        {
+          path:'moises/0e0d/0.35s_A256.mp3',
+          accuracy:9,
+          max_len:2,
+          entropy:3.5
+        },
+        {
+          path:'moises/0e0d/0.5s_A64.mp3',
+          accuracy:10.5,
+          max_len:3,
+          entropy:2.7
+        }
         
       ],
       comment: "comment for example 3..."
