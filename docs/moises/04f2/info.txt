@@ -1,0 +1,99 @@
+Mix : 0.25s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.25s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 10.22%, mean_len = 2.06, median_len = 1.00, max_len = 16, entropy = 1.00 [Bits], gt_set_portion = 42.11%
+
+Mix : 0.25s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.25s_A256_SchedSamp_SpecVQ_1_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 6.99%, mean_len = 1.17, median_len = 1.00, max_len = 3, entropy = 3.35 [Bits], gt_set_portion = 8.88%
+
+Mix : 0.25s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.25s_A64_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 4.30%, mean_len = 1.41, median_len = 1.00, max_len = 12, entropy = 1.79 [Bits], gt_set_portion = 22.39%
+
+Mix : 0.35s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.35s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 10.61%, mean_len = 1.85, median_len = 2.00, max_len = 6, entropy = 0.52 [Bits], gt_set_portion = 36.84%
+
+Mix : 0.35s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.35s_A256_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 5.30%, mean_len = 1.04, median_len = 1.00, max_len = 2, entropy = 0.23 [Bits], gt_set_portion = 6.95%
+
+Mix : 0.35s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.35s_A64_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 9.85%, mean_len = 1.48, median_len = 1.00, max_len = 3, entropy = 1.80 [Bits], gt_set_portion = 16.42%
+
+Mix : 0.5s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.5s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 9.38%, mean_len = 2.40, median_len = 2.00, max_len = 7, entropy = 0.88 [Bits], gt_set_portion = 36.84%
+
+Mix : 0.5s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.5s_A256_SchedSamp_SpecVQ_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 20.83%, mean_len = 1.89, median_len = 1.00, max_len = 6, entropy = 1.73 [Bits], gt_set_portion = 4.25%
+
+Mix : 0.5s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/Lead-Acc/04f2/Mem_bass.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/Lead-Acc/04f2/Guide_piano.wav
+	Model : canonne_0.5s_A64_SchedSamp_SpecVQ_3
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 5.21%, mean_len = 1.60, median_len = 1.00, max_len = 6, entropy = 1.57 [Bits], gt_set_portion = 14.93%
+

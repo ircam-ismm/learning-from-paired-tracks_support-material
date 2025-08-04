@@ -1,0 +1,99 @@
+Mix : 0.25s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.25s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 20.97%, mean_len = 1.57, median_len = 1.00, max_len = 6, entropy = 1.57 [Bits], gt_set_portion = 57.89%
+
+Mix : 0.25s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.25s_A256_SchedSamp_SpecVQ_1_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 6.45%, mean_len = 1.36, median_len = 1.00, max_len = 6, entropy = 4.04 [Bits], gt_set_portion = 15.06%
+
+Mix : 0.25s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.25s_A64_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.25[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 12.90%, mean_len = 1.24, median_len = 1.00, max_len = 5, entropy = 3.49 [Bits], gt_set_portion = 28.36%
+
+Mix : 0.35s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.35s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 23.48%, mean_len = 1.92, median_len = 1.00, max_len = 9, entropy = 1.92 [Bits], gt_set_portion = 42.11%
+
+Mix : 0.35s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.35s_A256_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 6.06%, mean_len = 1.11, median_len = 1.00, max_len = 2, entropy = 3.55 [Bits], gt_set_portion = 11.97%
+
+Mix : 0.35s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.35s_A64_SchedSamp_SpecVQ_2_continued
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.35[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 9.85%, mean_len = 1.19, median_len = 1.00, max_len = 4, entropy = 3.27 [Bits], gt_set_portion = 28.36%
+
+Mix : 0.5s_A16_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.5s_A16_SchedSamp_SpecVQ
+	Params :
+		vocab_size = 16, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 28.12%, mean_len = 1.95, median_len = 1.00, max_len = 7, entropy = 1.88 [Bits], gt_set_portion = 42.11%
+
+Mix : 0.5s_A256_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.5s_A256_SchedSamp_SpecVQ_continued
+	Params :
+		vocab_size = 256, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 9.38%, mean_len = 1.18, median_len = 1.00, max_len = 3, entropy = 3.27 [Bits], gt_set_portion = 11.97%
+
+Mix : 0.5s_A64_0 :
+	Memory: ../consignes_generation_2025/moises/changement_mode/f4df/Mem_piano.wav
+	Sources:
+	 - ../consignes_generation_2025/moises/changement_mode/f4df/Guide_guitar.wav
+	Model : canonne_0.5s_A64_SchedSamp_SpecVQ_3
+	Params :
+		vocab_size = 64, segmentation = uniform, w_size = 0.5[s]
+		top-K = 0.8, with_coupling = True, remove = False, decoding = greedy, force_coupling = True, temperature = 1.0, entropy_weight = 0.0
+	Analysis :
+		accuracy = 6.25%, mean_len = 1.33, median_len = 1.00, max_len = 4, entropy = 1.83 [Bits], gt_set_portion = 22.39%
+
