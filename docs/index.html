@@ -242,7 +242,11 @@ const exampleSets = [
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
       // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
     ],
-    comment: "Exemple relation harmonique, il y a des éléments interessants a creuser"
+    comment: "Exemple relation harmonique avec changement de mode. Tout d'abord on peut relever que l'exemple 0.5s A16 n'est pas synchronisé avec \
+    la source. Ce qui indique que même une fenêtre de segmentation uniforme ne garanti pas la synchronisation entre la réponse et le guide. En restant \
+    sur 0.5s, on observe que plus l'a taille de l'alphabet augmente, moins al réponse est fournie. cela est du a 2 cas de figures : choix volontaire \
+    de segemnets silencieux ou pas de corresponsance dans la mémoire. Ici A64 = pas de match et A256 = silence est ce que ca cofnirme que A++ -> modélisation \
+    plus compliquée ? On peut relever que la config 0.35s A16 présente des éléments harmoniques cihérents avec l'original."
   },
   {
     name: "cda4",
