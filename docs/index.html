@@ -37,6 +37,22 @@
       width: 90%;
       margin: 20px auto;
     }
+    .audio-container.large-audio {
+      min-width: 300px;
+      min-height: 120px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .comment-box {
+      width: 100%;
+      min-height: 60px;
+      margin-top: 10px;
+      padding: 8px;
+      resize: vertical;
+      font-size: 0.9rem;
+    }
+
     textarea {
       width: 100%;
       padding: 10px;
@@ -57,7 +73,7 @@
       border-left: 4px solid #007BFF;
       box-shadow: 0 0 8px rgba(0,0,0,0.08);
       border-radius: 8px;
-      max-width: 900px;
+      max-width: 1200px;
       line-height: 1.5;
     }
     .summary-section h3 {
@@ -214,42 +230,45 @@ const exampleSets = [
     basePath: "6c70",
     topFiles: ['guide.mp3','memory.mp3'],
     examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
+      { path:`moises/${name}/0.5s_A16.mp3`, accuracy: 18, max_len: 4, entropy:2.1},
+      { path:`moises/${name}/0.5s_A256.mp3`, accuracy:10, max_len:4, entropy:1.8},
+      { path:`moises/${name}/0.5s_A64.mp3`, accuracy:17, max_len:12, entropy:2}
     ],
-    comment: "Exemple relation harmonique avec changement de mode. Tout d'abord on peut relever que l'exemple 0.5s A16 n'est pas synchronisé avec \
-    la source. Ce qui indique que même une fenêtre de segmentation uniforme ne garanti pas la synchronisation entre la réponse et le guide. En restant \
-    sur 0.5s, on observe que plus l'a taille de l'alphabet augmente, moins al réponse est fournie. cela est du a 2 cas de figures : choix volontaire \
-    de segemnets silencieux ou pas de corresponsance dans la mémoire. Ici A64 = pas de match et A256 = silence est ce que ca cofnirme que A++ -> modélisation \
-    plus compliquée ? On peut relever que la config 0.35s A16 présente des éléments harmoniques cihérents avec l'original."
+    comment: "HArmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+    First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
+    does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
+    increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
+    match in the memory was found for that symbolic specification. In this example A64 = no match and A256 = volountary silence."
   },
   {
     name: "0358",
     basePath: "0358",
     topFiles: ['guide.mp3','memory.mp3'],
     examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
+      { path:`moises/${name}/0.5s_A16.mp3`, accuracy: 33, max_len: 9, entropy:1.9 },
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
       // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
     ],
-    comment: "Exenple de suivi d'intensité / changement de mode : guitare monte en intensité quand le piano joue de manière plus forte sur les notes \
-    (et invérsement). Pas grand chose a dire lors de la comparaison des configs, mais on observe que la config 0.5s_A16 reproduit bien l'interaction \
-    originale de suivi d'intensité. réponse 'douce/trkl' au début puis selection de segmnts/classes avec volume/intensité + élevée."
+    comment : "Intensity follow-up example. The piano is the input source and the guitar serves as memory. There is no general comment on the\
+    comparison between configurations. But, it can be noted that the 500ms window and alpabet size = 16 configuration reproduces the intensity follow-up interaction. \
+    response starts calmly and when the piano gains in intensity the response follows this evolution. The response aloso presents well suited harmonic relaionship with \
+    the input source. This shows that this configuration, not only learned harmonic relatioonships but also how to follow intensity variations. \
+    This observation prompts us to investigate what is encoded in the tokens coming from the Perception module."
   },
   {
     name: "04f2",
     basePath: "04f2",
     topFiles: ['guide.mp3','memory.mp3'],
     examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
+      { path:`moises/${name}/0.5s_A16.mp3`, accuracy: 9, max_len: 7, entropy:0.88},
+      { path:`moises/${name}/0.5s_A256.mp3`, accuracy:21, max_len:6, entropy:1.7},
+      { path:`moises/${name}/0.5s_A64.mp3`, accuracy:5, max_len:6, entropy:1.6}
     ],
-    comment: "relation Lead-acc, piano=lead et bass=acc. A16 ne 'marche pas' pck que les segments silencieux sont choisis par les configs. Il y a un bruit \
-    de grésillement a cause de re-normalisation lors du mix. En fqit, c'est pas que ca marche pas mais petit vocab ne permet pas, dans cet exemple, de sélectioner \
-    des segments non nuls. Alors que lors2que le voxqb est assez grand, le modèle peut générer des spécifications de classes non-silencieuses. + grand vocab -> + de choix. \
-    ps : il suffit d'un segment non-silencieux pour que l'effet du bruit disparaisse (e.g. 0.35s_A256)"
+    comment:"Lead - Accompaniment relationship example. The piano is the input source and corresponds to the Lead instrument, the bass is the accompaniment \
+    instrument serving as memory. We note that the 500ms and 16 alphabet size configuration does not work; the chosen segemnt is not in the correct tonality. But, \
+    when incresing the alphabet size the response is more coherent (harmonicity between source and response). This hints that a small vocabulary \
+    does not allow the model to select segments in the correct tonality, maybe because the class distribution is too coarse. While larger alphabets enable the \
+    selection of segemnts in the correct tonality."
   },
 ];
 
@@ -328,85 +347,112 @@ newSectionTitle.className = "category-title";
 newSectionTitle.textContent = "Generated examples for further discussion";
 container.appendChild(newSectionTitle);
 
-const content = document.getElementById('audioContent');
-
 exampleSets.forEach(set => {
   const section = document.createElement('div');
   section.className = 'category-section';
 
+  // Example title
   const title = document.createElement('div');
   title.className = 'category-title';
   title.textContent = `Example: ${set.name}`;
   section.appendChild(title);
 
-  // Top files
-  const topRow = document.createElement('div');
-  topRow.className = 'memory-guide-row';
-  set.topFiles.forEach(file => {
-    const container = document.createElement('div');
-    container.className = 'audio-container';
-    const audio = document.createElement('audio');
-    audio.controls = true;
-    audio.src = `${root}/${set.basePath}/${file}`;
-    audio.preload = "none";
-    const label = document.createElement('p');
-    label.textContent = file.replace('.mp3', '').replace('_',' ');
-    container.appendChild(label);
-    container.appendChild(audio);
-    topRow.appendChild(container);
-  });
-
+  // Comment box
   if (set.comment) {
     const commentBox = document.createElement('div');
-    commentBox.className = 'comment-box';
+    commentBox.className = 'summary-section';
     commentBox.textContent = set.comment;
     section.appendChild(commentBox);
   }
 
-  section.appendChild(topRow);
-
-  // All configs
-  const grid = document.createElement('div');
-  grid.className = 'grid';
-  allConfigs.forEach(cfg => {
-    const container = document.createElement('div');
-    container.className = 'audio-container';
-
-    const highlightExample = set.examples.find(e => e.path.includes(cfg));
-    const audio = document.createElement('audio');
-    audio.controls = true;
-    audio.src = `${root}/${set.basePath}/${cfg}.mp3`;
-    audio.preload = "none";
+  // Top files (Memory + Guide row)
+  const topRow = document.createElement('div');
+  topRow.className = 'memory-guide-row';
+  set.topFiles.forEach(file => {
+    const fileContainer = document.createElement('div');
+    fileContainer.className = 'audio-container largfe-audio';
 
     const label = document.createElement('p');
-    label.textContent = cfg.replace("_"," ");
+    label.textContent = file.replace('.mp3', '').replace('_',' ');
 
-    const metrics = document.createElement('div');
-    metrics.className = 'metrics';
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = `${root}/${set.basePath}/${file}`;
+    audio.preload = "none";
 
-    if (highlightExample) {
-      metrics.innerHTML = `
-        <small><b>Accuracy:</b> ${(highlightExample.accuracy).toFixed(1)}%</small><br>
-        <small><b>Max Len:</b> ${highlightExample.max_len}</small><br>
-        <small><b>Entropy:</b> ${highlightExample.entropy.toFixed(2)} [Bits]</small>
-      `;
-      container.style.fontWeight = 'bold';
-      container.style.color = '#000';
-    } else {
-      container.style.opacity = '0.7';
-    }
-
-    container.appendChild(label);
-    container.appendChild(audio);
-    container.appendChild(metrics);
-    grid.appendChild(container);
+    fileContainer.appendChild(label);
+    fileContainer.appendChild(audio);
+    topRow.appendChild(fileContainer);
   });
-  section.appendChild(grid);
+  section.appendChild(topRow);
 
+  // Grid with headers
+  const matrixContainer = document.createElement('div');
+  matrixContainer.className = 'matrix-grid';
 
+  // First row (empty corner + column headers)
+  matrixContainer.appendChild(document.createElement('div')); // empty top-left
+  ['250ms', '350ms', '500ms'].forEach(header => {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'matrix-header';
+    headerDiv.textContent = header;
+    matrixContainer.appendChild(headerDiv);
+  });
+
+  // Rows
+  ['16', '64', '256'].forEach((rowLabel, rowIndex) => {
+    // Row header
+    const rowHeaderDiv = document.createElement('div');
+    rowHeaderDiv.className = 'matrix-header';
+    rowHeaderDiv.textContent = rowLabel;
+    matrixContainer.appendChild(rowHeaderDiv);
+
+    // Audio cells for this row
+    ['250ms', '350ms', '500ms'].forEach((colLabel, colIndex) => {
+      const cfgIndex = rowIndex * 3 + colIndex;
+      const cfg = allConfigs[cfgIndex];
+
+      const audioBox = document.createElement('div');
+      audioBox.className = 'audio-container large-audio';
+
+      const label = document.createElement('p');
+      label.textContent = cfg.replace("_"," ");
+
+      const audio = document.createElement('audio');
+      audio.controls = true;
+      audio.src = `${root}/${set.basePath}/${cfg}.mp3`;
+      audio.preload = "none";
+
+      // Metrics if present
+      const metrics = document.createElement('div');
+      metrics.className = 'metrics';
+      const highlightExample = set.examples.find(e => e.path.includes(cfg));
+      if (highlightExample) {
+        metrics.innerHTML = `
+          <small><b>Accuracy:</b> ${(highlightExample.accuracy).toFixed(1)}%</small><br>
+          <small><b>Max Len:</b> ${highlightExample.max_len}</small><br>
+          <small><b>Entropy:</b> ${highlightExample.entropy.toFixed(2)} [Bits]</small>
+        `;
+        audioBox.style.fontWeight = 'bold';
+        audioBox.style.color = '#000';
+      } else {
+        audioBox.style.opacity = '0.7';
+      }
+
+      audioBox.appendChild(label);
+      audioBox.appendChild(audio);
+      audioBox.appendChild(metrics);
+      matrixContainer.appendChild(audioBox);
+    });
+  });
+
+  section.appendChild(matrixContainer);
   section.appendChild(document.createElement('hr'));
-  content.appendChild(section);
+  container.appendChild(section);
 });
+
+
+
 </script>
 </body>
 </html>
