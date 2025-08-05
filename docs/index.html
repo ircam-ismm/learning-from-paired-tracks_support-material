@@ -99,6 +99,21 @@
       margin-top: 5px;
       font-style: italic;
     }
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: auto repeat(3, 1fr);
+      grid-template-rows: auto repeat(3, auto);
+      gap: 10px;
+      align-items: center;
+      justify-items: center;
+      margin: 20px 0;
+    }
+
+    .matrix-header {
+      font-weight: bold;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -172,71 +187,32 @@ const allConfigs = [
   "0.25s_A256", "0.35s_A256", "0.5s_A256"
 ];
 
-const exampleSets = [
-  // {
-  //   name: "0611",
-  //   basePath: "0611",
-  //   topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-  //   examples: [
-  //     { path:'moises/0611/0.35s_A16.mp3', accuracy: 27, max_len: 8, entropy:0.98 },
-  //     { path:'moises/0611/0.25s_A64.mp3', accuracy:18, max_len:2, entropy:0.93 },
-  //     { path:'moises/0611/0.5s_A256.mp3', accuracy:12.5, max_len:1, entropy:0.21 }
-  //   ],
-  //   comment: 
-  //   "This is an example of lead-accompaniment interaction between two musicians, where X is the lead and Y handles the accompaniment \
-  //   Despite a memory with different notes of varying duration, all responses are monotone - \
-  //     no matter how large the alphabet. Interestingly, both A16 and A64 choose the same note in response,\
-  //      just A16 adds a little variation. A256 repeats 2 notes over the whole response, different from \
-  //      those chosen by the other alphabets, but these 2 notes are part of the same segment. \
-  //      In this example, we can see that alphabet size has no significant impact on the response generated."
-  // },
-  {
-    name: "524a",
-    basePath: "524a",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      { path:'moises/524a/0.5s_A16.mp3', accuracy: 39, max_len: 10, entropy:0.7 },
-      { path:'moises/524a/0.5s_A64.mp3', accuracy:10, max_len:8, entropy:2.8 },
-      { path:'moises/524a/0.5s_A256.mp3', accuracy:13.5, max_len:3, entropy:2.16 }
-    ],
-    comment: "This is a digression example with X playinfg the main chords and Y digressing through the corresponding scale.\
-    Generally speaking, all 3 alphabets tend to speak up at first, then fall silent. More specifically,\
-       it looks as if these configs - in this example - mainly speak up during silences.\
-      A16 presents long continuous sequences (good accuracy) and the larger the alphabet \
-      the less continuous the sequences, confirming the increasing difficulty of modeling symbolic sequences with larger alphabets.\
-      Counterintuitively, the accuracy of A256 is greater than A64, but still the maximum LCP is still greater for A64."
-  },
+const examplesNice = [
   {
     name: "0e0d",
     basePath: "0e0d",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      { path:'moises/0e0d/0.25s_A16.mp3', accuracy: 15, max_len: 5, entropy:2.3 },
-      { path:'moises/0e0d/0.35s_A256.mp3', accuracy:9, max_len:2, entropy:3.5 },
-      { path:'moises/0e0d/0.5s_A64.mp3', accuracy:10.5, max_len:3, entropy:2.7 }
-    ],
-    comment: "This is another example of lead-accompaniment interaction, where X is the leader and Y the accompaniment\
-    Since the memory is composed of fine-grained notes, the smallest window is well suited for this case. The largest window (0.5 seconds) \
-      is quite large and thus one segment generally contains more than one note and contrary to what is expected from the LCP figure (see paper) this \
-      configuration struggles to predict\
-       future tokens (max_len is small). Overall the accuracy is low, probably due to the complexity of the memory, i.e. memory uses a large \
-       proportion of the vocabulary so there are few repeated tokens."
+    topFiles: ['guide.mp3','memory.mp3'],
+    path : `moises/0e0d/0.5s_A16.mp3`,
   },
   {
-    name: "f4df",
-    basePath: "f4df",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
-    ],
-    comment: "This is an example of 'changement de mode' ... l'exemple ne reussit pas a changer de mode, verifier qd meme avc 0.35_16"
+    name: "747d",
+    basePath: "747d",
+    topFiles: ['guide.mp3','memory.mp3'],
+    path : `moises/747d/0.5s_A16.mp3`,
   },
+  {
+    name: "f010",
+    basePath: "f010",
+    topFiles: ['guide.mp3','memory.mp3'],
+    path : `moises/f010/0.5s_A64.mp3`,
+  },
+];
+
+const exampleSets = [
   {
     name: "6c70",
     basePath: "6c70",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    topFiles: ['guide.mp3','memory.mp3'],
     examples: [
       // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
@@ -249,38 +225,9 @@ const exampleSets = [
     plus compliquée ? On peut relever que la config 0.35s A16 présente des éléments harmoniques cihérents avec l'original."
   },
   {
-    name: "cda4",
-    basePath: "cda4",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
-    ],
-    comment: "Exemple relation harmonique, particuliermenet avec memoire=basse. 1) generation avec basse ne marche pas bien. Ici\
-    on observe que la fenetre de segmentation impacte fortement la qualité de la réponse générée :; 0.5s crée des grains 'incohérents', \
-    avec 90% de silence et petit début de pluck. Donc, encodage et concaténation pas bien réussis. Alors qu'avec 0.25s on a des segemnts \
-    avec full son, génération pas très intéressante pour autant... En restant sur 0.25s et en augmentant vocab on entend des réponses (un peu) \
-    plus variées."
-  },
-  {
-    name: "ea29",
-    basePath: "ea29",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
-    ],
-    comment: "Exemple relation harmonique, autre exemple de mem=bass. Segmentation plus cohérente avec 0.5 (appuyan tle porpose que fenetre \
-    uniforme n'est pas robuste). 0.35s_A16 ne répoind que avec des segemnts videes avec click a la fin mais avec A64 on entend d'autres segemts, alors \
-    que la mémoire c'est la même. en restant sur 0.5s, augmenter vocab génère reponse + variées, et contrairement aux attentes, les réponses avec \
-    des vocab plus grands ont des meilleurs stats : A64 et 256 ont meilleure accuracy et max/median_len que A16 -> vérifier si ca vient de gt_portion."
-  },
-  {
     name: "0358",
     basePath: "0358",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    topFiles: ['guide.mp3','memory.mp3'],
     examples: [
       // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
@@ -293,7 +240,7 @@ const exampleSets = [
   {
     name: "04f2",
     basePath: "04f2",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
+    topFiles: ['guide.mp3','memory.mp3'],
     examples: [
       // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
@@ -304,20 +251,82 @@ const exampleSets = [
     des segments non nuls. Alors que lors2que le voxqb est assez grand, le modèle peut générer des spécifications de classes non-silencieuses. + grand vocab -> + de choix. \
     ps : il suffit d'un segment non-silencieux pour que l'effet du bruit disparaisse (e.g. 0.35s_A256)"
   },
-  {
-    name: "9efa",
-    basePath: "9efa",
-    topFiles: ['original.mp3', 'memory.mp3', 'guide.mp3'],
-    examples: [
-      // { path:`moises/${name}/0.25s_A16.mp3`, accuracy: 15, max_len: 5, entropy:2.3 },
-      // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
-      // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
-    ],
-    comment: "relation Q&A. musicalement 0.5s A16 est plus complet (utilise plus de al mémoire a dispo) que les autres tailles de vocab \
-    en plus réponse reproduit 'mieux' le comprotement original. A64/256 sonmt en théorie plus variés (cf entropy) mais auditivement on \
-    entend moins de variations. même commentaire pour 0.35s, pas vrai pour 0.25s."
-  }
 ];
+
+const container = document.getElementById("audioContent");
+
+// Section title
+const title = document.createElement("div");
+title.className = "category-title";
+title.textContent = "Generated examples";
+container.appendChild(title);
+
+// // Section text
+// const text = document.createElement("div");
+// text.className = "summary-section";
+// text.textContent = "Below are presented 3 'good' examples";
+// container.appendChild(text);
+
+examplesNice.forEach(example => {
+  // Example title
+  const exampleTitle = document.createElement("h3");
+  exampleTitle.className = "category-title";
+  exampleTitle.textContent = `Example: ${example.name}`;
+  container.appendChild(exampleTitle);
+
+  // Row containing Memory, Guide, Output
+  const exampleRow = document.createElement("div");
+  exampleRow.className = "memory-guide-row"; // flex container for all three
+
+  // Memory & Guide
+  example.topFiles.forEach(file => {
+    const fileContainer = document.createElement("div");
+    fileContainer.className = "audio-container";
+
+    const label = document.createElement("p");
+    label.textContent = file.replace(".mp3", "").replace("_", " ");
+
+    const audio = document.createElement("audio");
+    audio.controls = true;
+    audio.preload = "none";
+    audio.src = `moises/${example.basePath}/${file}`;
+
+    fileContainer.appendChild(label);
+    fileContainer.appendChild(audio);
+    exampleRow.appendChild(fileContainer);
+  });
+
+  // Output
+  const outputContainer = document.createElement("div");
+  outputContainer.className = "audio-container";
+
+  const outputLabel = document.createElement("p");
+  outputLabel.textContent = "Output";
+
+  const outputAudio = document.createElement("audio");
+  outputAudio.controls = true;
+  outputAudio.preload = "none";
+  outputAudio.src = example.path;
+
+  outputContainer.appendChild(outputLabel);
+  outputContainer.appendChild(outputAudio);
+  exampleRow.appendChild(outputContainer);
+
+  // Append row
+  container.appendChild(exampleRow);
+
+});
+
+// Separator
+const separator = document.createElement("hr");
+separator.className = "separator";
+container.appendChild(separator);
+
+// New section title
+const newSectionTitle = document.createElement("div");
+newSectionTitle.className = "category-title";
+newSectionTitle.textContent = "Generated examples for further discussion";
+container.appendChild(newSectionTitle);
 
 const content = document.getElementById('audioContent');
 
