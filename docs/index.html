@@ -157,22 +157,6 @@
     for Creative Applications" (Bujard et al., 2025), along with some audio examples. The related code can be found 
     <a href="https://github.com/ircam-ismm/learning-from-paired-tracks">here</a>.
   </p>
-  <p>
-    Readers and listeners are invited to read the corresponding paper before delving into the following examples, specifically Sections 6 (Results) and 7 (Discussion).
-    Nevertheless, the ensuing discussion will distill the primary findings and conclusions. Initially, it was determined that the window size exhibited minimal to no influence on the model's performance metrics.
-    The primary factor influencing the model's performance was found to be the alphabet size. Our observations revealed several discernible patterns suggesting that increased alphabet size is associated with enhanced diversity.
-    The generation of symbolic specifications was successful; however, the modeling of the relationships between tracks proved to be more arduous.
-  </p>
-  <p>
-    The audio examples below are composed of : 'guide', 'memory' and output audios corresponding to, respectively, the input of the model,
-    the memory used by Dicy2 and the generated outputs. The 'Selected examples' are well selected audios that present good musical properties (harmonicity, tonality, variations).
-    Then, the "Generated examples for further discussion" present the output of all the 9 configurations (window_size X alphabet size) for some examples that enable some discussion
-    regarding the main results found in the paper.
-  </p>
-  <p>
-    Each example is completed with a comment summarizing the results of highlighted examples. The ID following the "Example :" corresponds 
-    to the name of the track folder in the MoisesDB dataset.
-  </p>
 </div>
 
 <!-- 🔹 Figures Section -->
@@ -186,6 +170,38 @@
       
     </p>
   </div>
+</div>
+
+<div class="summary-section">
+  <p>
+    The audio examples below are composed of : 'guide', 'memory' and output audios corresponding to, respectively, the input of the model,
+    the memory used by Dicy2 and the generated outputs. The 'Selected examples' are well selected audios that present good musical properties (harmonicity, tonality, variations).
+    Then, the "Generated examples for further discussion" present the output of all the 9 configurations (window_size X alphabet size) for some examples that enable some discussion
+    regarding the main results found in the paper.
+  </p>
+  <p>
+    Each example is completed with a comment summarizing the results of highlighted examples. The ID following the "Example :" corresponds 
+    to the name of the track folder in the MoisesDB dataset.
+  </p>
+  <p>
+    Readers and listeners are invited to read the corresponding paper before delving into the following examples, specifically Sections 6 (Results) and 7 (Discussion).
+  <p\>
+  <p>
+    In short :
+  </p>
+  <p>
+    - The primary factor influencing the model's performance was found to be the alphabet size
+  </p>
+  <p>
+    - Increased alphabet size is associated with enhanced diversity...
+  </p>
+  <p>
+    - But,  modeling the relationships between tracks becomes more arduous.
+  </p>
+  <p>
+    - The window size did not exhibit clear patterns, but MoisesDB (containing western pop music) favoured window sizes close to its pulsation (bpm).
+  </p>
+  
 </div>
 
 <div id="audioContent"></div>
@@ -233,7 +249,7 @@ const exampleSets = [
       { path:`moises/${name}/0.5s_A256.mp3`, accuracy:10, max_len:4, entropy:1.8},
       { path:`moises/${name}/0.5s_A64.mp3`, accuracy:17, max_len:12, entropy:2}
     ],
-    comment: "HArmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+    comment: "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
     First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
     does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
     increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
