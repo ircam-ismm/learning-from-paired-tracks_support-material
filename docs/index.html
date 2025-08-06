@@ -117,18 +117,32 @@
     }
     .matrix-grid {
       display: grid;
-      grid-template-columns: auto repeat(3, 1fr);
+      grid-template-columns: 100px repeat(3, 1fr);
       grid-template-rows: auto repeat(3, auto);
       gap: 10px;
       align-items: center;
       justify-items: center;
       margin: 20px 0;
     }
-
+    
     .matrix-header {
       font-weight: bold;
       text-align: center;
     }
+
+    .matrix-corner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      background: #f8f8f8;
+      border-bottom: 2px solid #ccc;
+      border-right: 2px solid #ccc;
+      padding-right: 5px;
+      font-size: 0.78em;
+      text-align: right;
+    }
+
 
   </style>
 </head>
@@ -209,18 +223,21 @@ const examplesNice = [
     basePath: "0e0d",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/0e0d/0.5s_A16.mp3`,
+    cfg : "window size : 500ms, alphabet size : 16"
   },
   {
     name: "747d",
     basePath: "747d",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/747d/0.5s_A16.mp3`,
+    cfg : "window size : 500ms, alphabet size : 16"
   },
   {
     name: "f010",
     basePath: "f010",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/f010/0.5s_A64.mp3`,
+    cfg : "window size : 500ms, alphabet size : 64"
   },
 ];
 
@@ -277,7 +294,7 @@ const container = document.getElementById("audioContent");
 // Section title
 const title = document.createElement("div");
 title.className = "category-title";
-title.textContent = "Generated examples";
+title.textContent = "Selected examples";
 container.appendChild(title);
 
 // // Section text
@@ -320,7 +337,7 @@ examplesNice.forEach(example => {
   outputContainer.className = "audio-container";
 
   const outputLabel = document.createElement("p");
-  outputLabel.textContent = "Output";
+  outputLabel.textContent = example.cfg;
 
   const outputAudio = document.createElement("audio");
   outputAudio.controls = true;
@@ -370,7 +387,7 @@ exampleSets.forEach(set => {
   topRow.className = 'memory-guide-row';
   set.topFiles.forEach(file => {
     const fileContainer = document.createElement('div');
-    fileContainer.className = 'audio-container largfe-audio';
+    fileContainer.className = 'audio-container large-audio';
 
     const label = document.createElement('p');
     label.textContent = file.replace('.mp3', '').replace('_',' ');
@@ -390,8 +407,13 @@ exampleSets.forEach(set => {
   const matrixContainer = document.createElement('div');
   matrixContainer.className = 'matrix-grid';
 
-  // First row (empty corner + column headers)
-  matrixContainer.appendChild(document.createElement('div')); // empty top-left
+  // First row (top-left corner label + column headers)
+  const cornerDiv = document.createElement('div');
+  cornerDiv.className = 'matrix-corner';
+  cornerDiv.textContent = 'Window Size →  Alphabet Size ↓';
+  matrixContainer.appendChild(cornerDiv);
+
+  // Column headers
   ['250ms', '350ms', '500ms'].forEach(header => {
     const headerDiv = document.createElement('div');
     headerDiv.className = 'matrix-header';
