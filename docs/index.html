@@ -158,36 +158,18 @@
     <a href="https://github.com/ircam-ismm/learning-from-paired-tracks">here</a>.
   </p>
   <p>
-    This work explored the possibility to include learned relationships in the decision process of Musical Agents.
-    The training of the different model configurations converged for both datasets, and the symbolic performances
-    on the re-generation task prove that some relationships have been learned. The evaluation on each dataset leads
-    to True Positive Percentage (TPP) between 10% and 20% of the learned relationships. Such percentage values,
-    which might appear as low, was expected, since the TPP values do not take into account any specificity of the
-    different tracks, but rather to general "musical relationships" that are emerging globally in each database.
-    Thus, the important finding is that we can confirm such general relationship are learned, as shown by the fact
-    that the values are significantly larger than a random generation (<em>p</em>-value &lt; 0.0001).
+    Readers and listeners are invited to read the corresponding paper before delving into the following examples, specifically Sections 6 (Results) and 7 (Discussion).
+    Nevertheless, the ensuing discussion will distill the primary findings and conclusions. Initially, it was determined that the window size exhibited minimal to no influence on the model's performance metrics.
+    The primary factor influencing the model's performance was found to be the alphabet size. Our observations revealed several discernible patterns suggesting that increased alphabet size is associated with enhanced diversity.
+    The generation of symbolic specifications was successful; however, the modeling of the relationships between tracks proved to be more arduous.
   </p>
   <p>
-    Therefore, what has been learned must be high-level, common relationships among all paired tracks, i.e.
-    corpus-level relationships. Moreover, such learning appears in both stylistically very different datasets,
-    MoisesDB and MICA, related to different music genre (pop/rock and free improvisation). This observation allows
-    us to, at least partially, validate the interest of our framework.
+    The audio examples below are composed of : 'guide', 'memory' and output audios corresponding to, respectively, the input of the model,
+    the memory used by Dicy2 and the generated outputs. The 'Selected examples' are well selected audios that present good musical properties (harmonicity, tonality, variations).
+    Then, the "Generated examples for further discussion" present the output of all the 9 configurations (window_size X alphabet size) for some examples that enable some discussion
+    regarding the main results found in the paper.
   </p>
   <p>
-    The segmentation size appears to have little impact for the TPP. Instead, increased vocabulary size generally 
-    correlates with reduced performance likely due to the difficulty of modeling fine-grained relationships. 
-    Large variance observed across configurations indicates a 
-    pronounced variability in the model’s performances.
-  </p>
-  <p>
-    While LCP results outperform random baseline, the prefix lengths remain low, indicating difficulty in anticipating 
-    future tokens. MoisesDB — composed of Western pop music, i.e., pulsed music — appears to require a 
-    segmentation window that aligns with the beat (pulse) of the track. While LCP shows no consistent trend across 
-    segment duration or alphabet size for MoisesDB, we find that A256/0.25s approaches the maximum LCP value.
-  </p>
-  <p>
-    The audio examples below are composed of : 'original', 'memory' and 'source' audios corresponding to the original mix, 
-    the memory used by Dicy2 and the input of the model. Then, the output grid of all 9 configurations ([window size]s A[alphabet size]).
     Each example is completed with a comment summarizing the results of highlighted examples. The ID following the "Example :" corresponds 
     to the name of the track folder in the MoisesDB dataset.
   </p>
