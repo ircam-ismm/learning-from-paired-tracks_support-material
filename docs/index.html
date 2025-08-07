@@ -175,19 +175,15 @@
 <div class="summary-section">
   <p>
     The audio examples below are composed of : 'guide', 'memory' and output audios corresponding to, respectively, the input of the model,
-    the memory used by Dicy2 and the generated outputs. The 'Selected examples' are well selected audios that present good musical properties (harmonicity, tonality, variations).
-    Then, the "Generated examples for further discussion" present the output of all the 9 configurations (window_size X alphabet size) for some examples that enable some discussion
-    regarding the main results found in the paper.
-  </p>
-  <p>
-    Each example is completed with a comment summarizing the results of highlighted examples. The ID following the "Example :" corresponds 
-    to the name of the track folder in the MoisesDB dataset.
+    the memory used by Dicy2 and the mix 'guide' + model output. The 'Selected examples' are well selected audios that present good musical properties (harmonicity, tonality, variations).
+    Then, the "Examples illustrating future work directions" present all 9 configurations (window_size X alphabet size) for some examples that enable some discussion
+    regarding the main results and future works of the paper. Each example is completed with a comment summarizing the results of highlighted examples.
   </p>
   <p>
     Readers and listeners are invited to read the corresponding paper before delving into the following examples, specifically Sections 6 (Results) and 7 (Discussion).
   <p\>
   <p>
-    In short :
+    The main results and conclusions are summarized in the following :
   </p>
   <p>
     - The primary factor influencing the model's performance was found to be the alphabet size
@@ -199,7 +195,7 @@
     - But,  modeling the relationships between tracks becomes more arduous.
   </p>
   <p>
-    - The window size did not exhibit clear patterns, but MoisesDB (containing western pop music) favoured window sizes close to its pulsation (bpm).
+    - The window size did not exhibit clear patterns, but MoisesDB (containing western pop music, i.e. pulsed music) favoured window sizes close to its pulsation (bpm).
   </p>
   
 </div>
@@ -221,21 +217,24 @@ const examplesNice = [
     basePath: "0e0d",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/0e0d/0.5s_A16.mp3`,
-    cfg : "window size : 500ms, alphabet size : 16"
+    cfg : "window size : 500ms, alphabet size : 16",
+    instruments : ["piano","guitar"],
   },
   {
     name: "747d",
     basePath: "747d",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/747d/0.5s_A16.mp3`,
-    cfg : "window size : 500ms, alphabet size : 16"
+    cfg : "window size : 500ms, alphabet size : 16",
+    instruments : ["vocals","guitar"],
   },
   {
     name: "f010",
     basePath: "f010",
     topFiles: ['guide.mp3','memory.mp3'],
     path : `moises/f010/0.5s_A64.mp3`,
-    cfg : "window size : 500ms, alphabet size : 64"
+    cfg : "window size : 500ms, alphabet size : 64",
+    instruments : ["synth","guitar"],
   },
 ];
 
@@ -249,11 +248,16 @@ const exampleSets = [
       { path:`moises/${name}/0.5s_A256.mp3`, accuracy:10, max_len:4, entropy:1.8},
       { path:`moises/${name}/0.5s_A64.mp3`, accuracy:17, max_len:12, entropy:2}
     ],
-    comment: "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
-    First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
-    does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
-    increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
-    match in the memory was found for that symbolic specification. In this example A64 = no match and A256 = volountary silence."
+    comment : "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+    Further work on the size of the alphabet is crucial, rather than using arbitrary alphabets. It's clear from this example \
+    that an arbitrary alphabet that's too small leads to a lot of repetition, and an arbitrary alphabet that's too large leads to either no \
+    solution or a lot of silence. A silent segment can be volountarly selected by the model or no \
+    match in the memory was found for that symbolic specification. In this example A64 = (mostly) no match and A256 = (mostly) volountary silence."
+    // comment: "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+    // First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
+    // does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
+    // increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
+    // match in the memory was found for that symbolic specification. In this example A64 = no match and A256 = volountary silence."
   },
   {
     name: "0358",
@@ -264,11 +268,16 @@ const exampleSets = [
       // { path:`moises/${name}/0.35s_A256.mp3`, accuracy:9, max_len:2, entropy:3.5 },
       // { path:`moises/${name}/0.5s_A64.mp3`, accuracy:10.5, max_len:3, entropy:2.7 }
     ],
-    comment : "Intensity follow-up example. The piano is the input source and the guitar serves as memory. There is no general comment on the\
-    comparison between configurations. But, it can be noted that the 500ms window and alpabet size = 16 configuration reproduces the intensity follow-up interaction. \
-    response starts calmly and when the piano gains in intensity the response follows this evolution. The response aloso presents well suited harmonic relaionship with \
-    the input source. This shows that this configuration, not only learned harmonic relatioonships but also how to follow intensity variations. \
-    This observation prompts us to investigate what is encoded in the tokens coming from the Perception module."
+    // comment : "Intensity follow-up example. The piano is the input source and the guitar serves as memory. There is no general comment on the\
+    // comparison between configurations. But, it can be noted that the 500ms window and alpabet size = 16 configuration reproduces the intensity follow-up interaction. \
+    // response starts calmly and when the piano gains in intensity the response follows this evolution. The response aloso presents well suited harmonic relaionship with \
+    // the input source. This shows that this configuration, not only learned harmonic relatioonships but also how to follow intensity variations. \
+    // This observation prompts us to investigate what is encoded in the tokens coming from the Perception module."
+    comment: "Intensity follow-up example. The piano is the input source and the guitar serves as memory. In this example, the \
+    melodic-harmonic relationship between guide and output is not very satisfactory, but we observe \
+    that a jump in intensity in the guide implies a jump in intensity in the output, which invites us, firstly, to investigate more \
+    deeply what is encoded by our perception module, and, secondly, to study our decision module with symbols that represent values \
+    known to decorrelate the two works."
   },
   {
     name: "04f2",
@@ -303,22 +312,22 @@ container.appendChild(title);
 
 examplesNice.forEach(example => {
   // Example title
-  const exampleTitle = document.createElement("h3");
-  exampleTitle.className = "category-title";
-  exampleTitle.textContent = `Example: ${example.name}`;
-  container.appendChild(exampleTitle);
+  // const exampleTitle = document.createElement("h3");
+  // exampleTitle.className = "category-title";
+  // exampleTitle.textContent = `Example: ${example.name}`;
+  // container.appendChild(exampleTitle);
 
   // Row containing Memory, Guide, Output
   const exampleRow = document.createElement("div");
   exampleRow.className = "memory-guide-row"; // flex container for all three
 
   // Memory & Guide
-  example.topFiles.forEach(file => {
+  example.topFiles.forEach((file,idx) => {
     const fileContainer = document.createElement("div");
     fileContainer.className = "audio-container";
 
     const label = document.createElement("p");
-    label.textContent = file.replace(".mp3", "").replace("_", " ");
+    label.textContent = `${file.replace(".mp3", "")} : ${example.instruments[idx]}`;
 
     const audio = document.createElement("audio");
     audio.controls = true;
@@ -359,18 +368,18 @@ container.appendChild(separator);
 // New section title
 const newSectionTitle = document.createElement("div");
 newSectionTitle.className = "category-title";
-newSectionTitle.textContent = "Generated examples for further discussion";
+newSectionTitle.textContent = "Examples illustrating future work directions";
 container.appendChild(newSectionTitle);
 
 exampleSets.forEach(set => {
   const section = document.createElement('div');
   section.className = 'category-section';
 
-  // Example title
-  const title = document.createElement('div');
-  title.className = 'category-title';
-  title.textContent = `Example: ${set.name}`;
-  section.appendChild(title);
+  // // Example title
+  // const title = document.createElement('div');
+  // title.className = 'category-title';
+  // title.textContent = `Example: ${set.name}`;
+  // section.appendChild(title);
 
   // Comment box
   if (set.comment) {
