@@ -143,6 +143,13 @@
       text-align: right;
     }
 
+    .column-header {
+      text-align: center;
+      padding-bottom: 5px;
+      font-size: 1rem; /* adjust as needed */
+    }
+
+
 
   </style>
 </head>
@@ -239,26 +246,26 @@ const examplesNice = [
 ];
 
 const exampleSets = [
-  {
-    name: "6c70",
-    basePath: "6c70",
-    topFiles: ['guide.mp3','memory.mp3'],
-    examples: [
-      { path:`moises/${name}/0.5s_A16.mp3`, accuracy: 18, max_len: 4, entropy:2.1},
-      { path:`moises/${name}/0.5s_A256.mp3`, accuracy:10, max_len:4, entropy:1.8},
-      { path:`moises/${name}/0.5s_A64.mp3`, accuracy:17, max_len:12, entropy:2}
-    ],
-    comment : "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
-    Further work on the size of the alphabet is crucial, rather than using arbitrary alphabets. It's clear from this example \
-    that an arbitrary alphabet that's too small leads to a lot of repetition, and an arbitrary alphabet that's too large leads to either no \
-    solution or a lot of silence. A silent segment can be volountarly selected by the model or no \
-    match in the memory was found for that symbolic specification. In this example A64 = (mostly) no match and A256 = (mostly) volountary silence."
-    // comment: "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
-    // First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
-    // does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
-    // increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
-    // match in the memory was found for that symbolic specification. In this example A64 = no match and A256 = volountary silence."
-  },
+  // {
+  //   name: "6c70",
+  //   basePath: "6c70",
+  //   topFiles: ['guide.mp3','memory.mp3'],
+  //   examples: [
+  //     { path:`moises/${name}/0.5s_A16.mp3`, accuracy: 18, max_len: 4, entropy:2.1},
+  //     { path:`moises/${name}/0.5s_A256.mp3`, accuracy:10, max_len:4, entropy:1.8},
+  //     { path:`moises/${name}/0.5s_A64.mp3`, accuracy:17, max_len:12, entropy:2}
+  //   ],
+  //   comment : "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+  //   Further work on the size of the alphabet is crucial, rather than using arbitrary alphabets. It's clear from this example \
+  //   that an arbitrary alphabet that's too small leads to a lot of repetition, and an arbitrary alphabet that's too large leads to either no \
+  //   solution or a lot of silence. A silent segment can be volountarly selected by the model or no \
+  //   match in the memory was found for that symbolic specification. In this example A64 = (mostly) no match and A256 = (mostly) volountary silence."
+  //   // comment: "Harmonic relationship and mode change example. The input source is the piano and the guitar is the memory. \
+  //   // First of all, the 0.5s A16 example is not synchronized with the input source. This indicates that even a uniform segmentation window \
+  //   // does not guarantee synchronization between the response and the source. On the 500ms column, we observe that as the size of the alphabet \
+  //   // increases, the response becomes more silent. This is due to two scenarios : a silent segment is volountarly selected by the model or no \
+  //   // match in the memory was found for that symbolic specification. In this example A64 = no match and A256 = volountary silence."
+  // },
   {
     name: "0358",
     basePath: "0358",
@@ -310,6 +317,33 @@ container.appendChild(title);
 // text.textContent = "Below are presented 3 'good' examples";
 // container.appendChild(text);
 
+// Header row
+const headerRow = document.createElement("div");
+headerRow.className = "memory-guide-row";
+
+// Empty cells for Memory & Guide
+examplesNice[0].topFiles.forEach(file => {
+  const empty = document.createElement("div");
+  empty.className = "audio-container";
+  empty.textContent = file.replace(".mp3","")
+  headerRow.appendChild(empty);
+});
+
+// Output + Guide header cell
+const outputHeader = document.createElement("div");
+outputHeader.className = "audio-container";
+
+const headerText = document.createElement("div");
+headerText.className = "column-header";
+headerText.textContent = "Output + Guide";
+
+outputHeader.appendChild(headerText);
+headerRow.appendChild(outputHeader);
+
+// Append header row before examples
+container.appendChild(headerRow);
+
+
 examplesNice.forEach(example => {
   // Example title
   // const exampleTitle = document.createElement("h3");
@@ -327,7 +361,7 @@ examplesNice.forEach(example => {
     fileContainer.className = "audio-container";
 
     const label = document.createElement("p");
-    label.textContent = `${file.replace(".mp3", "")} : ${example.instruments[idx]}`;
+    label.textContent = `${example.instruments[idx]}`;
 
     const audio = document.createElement("audio");
     audio.controls = true;
@@ -409,6 +443,16 @@ exampleSets.forEach(set => {
     topRow.appendChild(fileContainer);
   });
   section.appendChild(topRow);
+
+  //Top header for output+guide title
+  // Output + Guide header cell
+  const outputHeader = document.createElement("div");
+  outputHeader.className = "audio-container";
+
+  const headerText = document.createElement("div");
+  headerText.className = "column-header";
+  headerText.textContent = "Output + Guide Matrix";
+  section.appendChild(headerText);
 
   // Grid with headers
   const matrixContainer = document.createElement('div');
